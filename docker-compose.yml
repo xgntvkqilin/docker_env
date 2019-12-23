@@ -44,9 +44,9 @@ services:
 
 ### WORKER Container #######################################
 
-  kean-worker:
+  im-queue:
     build:
-      context: ./kean-worker
+      context: ./im-queue
     volumes:
       - ${WEB_ROOT}:/var/www/html
     depends_on:
@@ -54,10 +54,24 @@ services:
       - redis
     tty: true
     restart: always
+
+  im-swoole:
+    build:
+      context: ./im-swoole
+    volumes:
+      - ${WEB_ROOT}:/var/www/html
+    ports:
+        - "${SWOOLE_HTTP_PORT}:${SWOOLE_HTTP_PORT}"
+    depends_on:
+      - mysql
+      - redis
+    tty: true
+    restart: always
+
 #
-#  worker2:
+#  worker:
 #    build:
-#      context: ./worker2
+#      context: ./worker
 #    volumes:
 #      - ${WEB_ROOT}:/var/www/html
 #    depends_on:
@@ -107,17 +121,17 @@ services:
 
 ### PHPMyAdmin Container #########################################
 
-#  phpmyadmin:
-#    image: phpmyadmin/phpmyadmin
-#    ports:
-#      - "${PHPMYADMIN_PORT}:80"
-#    links:
-#        - mysql:db
-#    depends_on:
-#      - mysql
-#    restart: always
-#    environment:
-#      - PMA_HOST=nletech-eu-db.c1snnfqvbket.eu-central-1.rds.amazonaws.com
+  # phpmyadmin:
+  #   image: phpmyadmin/phpmyadmin
+  #   ports:
+  #     - "${PHPMYADMIN_PORT}:80"
+  #   links:
+  #       - mysql:db
+  #   depends_on:
+  #     - mysql
+  #   restart: always
+  #   environment:
+  #     - PMA_HOST=mysql
 
 ### Redis Container #########################################
 

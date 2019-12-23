@@ -32,10 +32,10 @@ COPY ./worker.sh /tmp
 
 RUN chmod +x /tmp/worker.sh
 
-COPY ./wkhtmltopdf /usr/bin
-RUN chmod +x /usr/bin/wkhtmltopdf
+# COPY ./wkhtmltopdf /usr/bin
+# RUN chmod +x /usr/bin/wkhtmltopdf
 
-COPY ./simsun.ttc /usr/share/fonts/
+# COPY ./simsun.ttc /usr/share/fonts/
 
 WORKDIR /var/www/html
 

@@ -32,10 +32,5 @@ RUN pecl install -o -f redis \
 &&  rm -rf /tmp/pear \
 &&  docker-php-ext-enable redis
 
-COPY ./wkhtmltopdf /usr/bin
-RUN chmod +x /usr/bin/wkhtmltopdf
-
-COPY ./simsun.ttc /usr/share/fonts/
-
 COPY ./php.ini /usr/local/etc/php/conf.d/php.ini
 

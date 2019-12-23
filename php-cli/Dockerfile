@@ -32,15 +32,11 @@ RUN pecl install -o -f redis \
 
 COPY ./php.ini /usr/local/etc/php/conf.d/php.ini
 
-#RUN apt install wget -y 
-#RUN wget https://getcomposer.org/download/1.6.5/composer.phar -O /usr/bin/composer
+# RUN apt install wget -y 
+# RUN wget https://getcomposer.org/download/1.6.5/composer.phar -O /usr/bin/composer
 COPY ./composer /usr/bin/composer
 RUN chmod +x /usr/bin/composer
-RUN composer config -g repo.packagist composer https://packagist.laravel-china.org
-RUN composer global require laravel/installer
-
-COPY ./wkhtmltopdf /usr/bin
-RUN chmod +x /usr/bin/wkhtmltopdf
+RUN composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 
 WORKDIR /var/www/html
 
